@@ -24,6 +24,8 @@
 
 ### Bridges
 
+- (feat) [\#2529](https://github.com/bandprotocol/bandchain/pull/2529) Add harmony to bridge evm
+
 ### Runtime
 
 ### Owasm
