@@ -16,6 +16,7 @@
 
 ### Emitter & Flusher
 
+- (impv) [\#2558](https://github.com/bandprotocol/bandchain/pull/2558) fast-sync: emit all oracle module from start state
 - (feat) [\#2551](https://github.com/bandprotocol/bandchain/pull/2551) fast-sync: add flag enable fast sync and emit all account and validator
 
 ### Scan
