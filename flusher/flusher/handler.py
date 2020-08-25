@@ -29,7 +29,6 @@ from .db import (
     historical_oracle_statuses,
     oracle_script_requests,
     request_count_per_days,
-    data_source_requests,
 )
 
 
@@ -139,7 +138,6 @@ class Handler(object):
             }
         )
         self.conn.execute(raw_requests.insert(), msg)
-        self.handle_set_data_source_request({"data_source_id": msg["data_source_id"]})
 
     def handle_new_val_request(self, msg):
         msg["validator_id"] = self.get_validator_id(msg["validator"])
