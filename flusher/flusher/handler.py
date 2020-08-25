@@ -29,6 +29,7 @@ from .db import (
     historical_oracle_statuses,
     oracle_script_requests,
     request_count_per_days,
+    data_source_requests,
 )
 
 
@@ -138,6 +139,7 @@ class Handler(object):
             }
         )
         self.conn.execute(raw_requests.insert(), msg)
+        self.handle_set_data_source_request({"data_source_id": msg["data_source_id"]})
 
     def handle_new_val_request(self, msg):
         msg["validator_id"] = self.get_validator_id(msg["validator"])
@@ -145,11 +147,13 @@ class Handler(object):
         self.conn.execute(val_requests.insert(), msg)
 
     def handle_new_report(self, msg):
-        msg["transaction_id"] = self.get_transaction_id(msg["tx_hash"])
+        if msg["tx_hash"] is not None:
+            msg["transaction_id"] = self.get_transaction_id(msg["tx_hash"])
         del msg["tx_hash"]
         msg["validator_id"] = self.get_validator_id(msg["validator"])
         del msg["validator"]
-        msg["reporter_id"] = self.get_account_id(msg["reporter"])
+        if msg["reporter"] is not None:
+            msg["reporter_id"] = self.get_account_id(msg["reporter"])
         del msg["reporter"]
         self.conn.execute(reports.insert(), msg)
 
