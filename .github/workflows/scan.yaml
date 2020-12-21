@@ -8,6 +8,7 @@ jobs:
       working-directory: ./scan
 
     steps:
+      - run: echo "CI_HEAD_REF=$CI_HEAD_REF"
       - name: Code Checkout
         uses: actions/checkout@v2
 
