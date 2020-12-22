@@ -1,13 +1,15 @@
 name: Scan Workflow
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   scan-test:
     runs-on: ubuntu-latest
     env:
       working-directory: ./scan
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'thebevrishot/bandchain'
 
     steps:
+      - run: echo "CI_HEAD_REF=$CI_HEAD_REF"
       - name: Code Checkout
         uses: actions/checkout@v2
 
